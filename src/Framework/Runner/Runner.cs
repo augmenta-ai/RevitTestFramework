@@ -1063,10 +1063,10 @@ namespace RTF.Framework
             {
                 var tests = GetRunnableTests();
                 var remainingTests = tests.Where(x => !x.Completed);
-                if (remainingTests.Any())
+                foreach (var remainingTest in remainingTests)
                 {
-                    CreateJournalForTestCases(remainingTests);
-                    ProcessBatchTests(journalPath, false);
+                    remainingTest.Completed = true;
+                    remainingTest.TestStatus = TestStatus.TimedOut;
                 }
             }
 
@@ -1120,9 +1120,14 @@ namespace RTF.Framework
                         runningTestCase.TestStatus = TestStatus.TimedOut;
                         OnTestTimedOut(runningTestCase);
                     }
+                    else
+                    {
+                        return false;
+                    }
                     return false;
                 }
-                else if (cancelRequested)
+
+                if (cancelRequested)
                 {
                     // If the cancel button has been clicked
                     cancelRequested = false;
@@ -1341,9 +1346,9 @@ namespace RTF.Framework
                     journal += $"Jrn.Data \"MRUFileName\"  , \"{modelPath}\" \n";
                 }
 
-                journal += $"Jrn.RibbonEvent \"Execute external command:{PluginGuid}:{PluginClass}\" \n" +
+                /*journal += $"Jrn.RibbonEvent \"Execute external command:{PluginGuid}:{PluginClass}\" \n" +
                            $"Jrn.Data \"APIStringStringMapJournalData\", 6, \"testName\", \"{testName}\", \"fixtureName\", \"{fixtureName}\", \"testAssembly\", \"{assemblyPath}\", \"resultsPath\", \"{resultsPath}\", \"debug\",\"{IsDebug}\",\"workingDirectory\",\"{WorkingDirectory}\" \n" +
-                           $"Jrn.Command \"Internal\" , \"Flush undo and redo stacks , ID_FLUSH_UNDO\" \n";
+                           $"Jrn.Command \"Internal\" , \"Flush undo and redo stacks , ID_FLUSH_UNDO\" \n";*/
 
                 if (modelSemantics.HasFlag(ModelSemantics.Close))
                 {
@@ -1927,7 +1932,7 @@ namespace RTF.Framework
                 {"isExport","Export the journal file for each wanted test. (OPTIONAL)",v=> setupData.IsExport = v != null },
                 {"journalSample=","A sample file for export. (OPRIONAL)", v=> setupData.JournalSample = Path.GetFullPath(v)},
                 {"exportFolder=","A folder to store the export journal files. (OPTIONAL)", v=> setupData.ExportFolder = Path.GetFullPath(v)},
-                {"time", "The time, in milliseconds, after which RTF will close the testing process automatically. (OPTIONAL)", v=>setupData.Timeout = Int32.Parse(v) },
+                {"time=", "The time, in milliseconds, after which RTF will close the testing process automatically. (OPTIONAL)", v=>setupData.Timeout = Int32.Parse(v) },
                 {"d|debug", "Should RTF attempt to attach to a debugger?. (OPTIONAL)", v=>setupData.IsDebug = v != null },
                 {"h|help", "Show this message and exit. (OPTIONAL)", v=> showHelp = v != null }
             };
