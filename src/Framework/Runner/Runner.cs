@@ -1120,10 +1120,6 @@ namespace RTF.Framework
                         runningTestCase.TestStatus = TestStatus.TimedOut;
                         OnTestTimedOut(runningTestCase);
                     }
-                    else
-                    {
-                        return false;
-                    }
                     return false;
                 }
 
@@ -1346,9 +1342,9 @@ namespace RTF.Framework
                     journal += $"Jrn.Data \"MRUFileName\"  , \"{modelPath}\" \n";
                 }
 
-                /*journal += $"Jrn.RibbonEvent \"Execute external command:{PluginGuid}:{PluginClass}\" \n" +
+                journal += $"Jrn.RibbonEvent \"Execute external command:{PluginGuid}:{PluginClass}\" \n" +
                            $"Jrn.Data \"APIStringStringMapJournalData\", 6, \"testName\", \"{testName}\", \"fixtureName\", \"{fixtureName}\", \"testAssembly\", \"{assemblyPath}\", \"resultsPath\", \"{resultsPath}\", \"debug\",\"{IsDebug}\",\"workingDirectory\",\"{WorkingDirectory}\" \n" +
-                           $"Jrn.Command \"Internal\" , \"Flush undo and redo stacks , ID_FLUSH_UNDO\" \n";*/
+                           $"Jrn.Command \"Internal\" , \"Flush undo and redo stacks , ID_FLUSH_UNDO\" \n";
 
                 if (modelSemantics.HasFlag(ModelSemantics.Close))
                 {
