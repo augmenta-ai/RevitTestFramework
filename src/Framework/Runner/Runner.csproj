@@ -99,6 +99,9 @@
     <Error Condition="!Exists('..\..\packages\Fody.3.2.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.3.2.4\build\Fody.targets'))" />
     <Error Condition="!Exists('..\..\packages\Costura.Fody.3.1.2\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Costura.Fody.3.1.2\build\Costura.Fody.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>COPY $(SolutionDir)nunit3-junit.xslt $(OutDir)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
