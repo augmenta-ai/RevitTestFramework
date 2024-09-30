@@ -3,7 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <RevitVersionNumber Condition=" '$(RevitVersionNumber)' == '' ">Preview Release</RevitVersionNumber>
+    <RevitVersionNumber Condition=" '$(RevitVersionNumber)' == '' ">2020</RevitVersionNumber>
     <OutputPath Condition=" '$(OutputPath)' == '' ">$(SolutionDir)..\bin\$(Platform)\$(Configuration)</OutputPath>
     <NunitPath Condition=" '$(NunitPath)' == '' ">$(SolutionDir)..\lib\NUnit</NunitPath>
     <REVITAPI Condition=" '$(REVITAPI)' == '' ">$(SolutionDir)..\lib\Revit $(RevitVersionNumber)\net48</REVITAPI>
@@ -21,7 +21,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <RevitVersionNumber Condition=" '$(RevitVersionNumber)' == '' ">Preview Release</RevitVersionNumber>
+    <RevitVersionNumber Condition=" '$(RevitVersionNumber)' == '' ">2020</RevitVersionNumber>
     <OutputPath Condition=" '$(OutputPath)' == '' ">$(SolutionDir)..\bin\$(Platform)\$(Configuration)</OutputPath>
     <NunitPath Condition=" '$(NunitPath)' == '' ">$(SolutionDir)..\lib\NUnit</NunitPath>
     <REVITAPI Condition=" '$(REVITAPI)' == '' ">$(SolutionDir)..\lib\Revit $(RevitVersionNumber)\net48</REVITAPI>
