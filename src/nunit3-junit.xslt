@@ -20,6 +20,26 @@
       </testsuite>
       <xsl:apply-templates select="test-suite"/>
     </xsl:if>
+	<xsl:if test="results">
+      <xsl:apply-templates select="results"/>
+    </xsl:if>
+    <xsl:if test="not(test-case)">
+      <xsl:apply-templates/>
+    </xsl:if>
+  </xsl:template>
+  
+  <xsl:template match="results">
+    <xsl:if test="test-case">
+      <testsuite tests="{@testcasecount}" time="{@duration}" errors="{@testcasecount - @passed - @skipped - @failed}" failures="{@failed}" skipped="{@skipped}" timestamp="{@start-time}">
+        <xsl:attribute name="name">
+          <xsl:for-each select="ancestor-or-self::test-suite[@type='TestSuite']/@name">
+            <xsl:value-of select="concat(., '.')"/>
+          </xsl:for-each>
+        </xsl:attribute>
+        <xsl:apply-templates select="test-case"/>
+      </testsuite>
+      <xsl:apply-templates select="test-suite"/>
+    </xsl:if>
     <xsl:if test="not(test-case)">
       <xsl:apply-templates/>
     </xsl:if>
@@ -30,7 +50,6 @@
       <xsl:if test="@runstate = 'Skipped' or @runstate = 'Ignored'">
         <skipped/>
       </xsl:if>
-      
       <xsl:apply-templates/>
     </testcase>
   </xsl:template>
@@ -69,4 +88,3 @@
 
   <xsl:template match="properties"/>
 </xsl:stylesheet>
-
