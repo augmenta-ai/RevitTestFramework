@@ -100,9 +100,11 @@ namespace RTF.Framework
 
             var testAttribs = CustomAttributeData.GetCustomAttributes(test);
 
+            var ignoreTest = testAttribs.Any(x => x.Constructor.DeclaringType.Name == nameof(IgnoreAttribute));
+
             var testModelAttrib = testAttribs.FirstOrDefault(x => x.Constructor.DeclaringType.Name == nameof(TestModelAttribute));
 
-            if (testModelAttrib != null)
+            if (testModelAttrib != null && !ignoreTest)
             {
                 string absolutePath;
 

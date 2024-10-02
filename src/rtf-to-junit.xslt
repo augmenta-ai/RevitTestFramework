@@ -8,19 +8,19 @@
 			<xsl:value-of select="@name"/>
 		</xsl:attribute>
 		<xsl:attribute name="tests">
-			<xsl:value-of select="@total"/>
+			<xsl:value-of select="count(test-suite/results/test-suite/results/test-case)"/>
 		</xsl:attribute>
 		<xsl:attribute name="failures">
-			<xsl:value-of select="@failures"/>
+			<xsl:value-of select="count(test-suite/results/test-suite/results/test-case[@result='Failure'])"/>
 		</xsl:attribute>
 		<xsl:attribute name="errors">
-			<xsl:value-of select="@errors+@invalid"/>
+			<xsl:value-of select="count(test-suite/results/test-suite/results/test-case[@result='Error'])+count(test-suite/results/test-suite/results/test-case[@result='TimedOut'])"/>
 		</xsl:attribute>
 		<xsl:attribute name="skipped">
-			<xsl:value-of select="@not-run+@ignored+@skipped"/>
+			<xsl:value-of select="count(test-suite/results/test-suite/results/test-case[@result='NotRun'])+count(test-suite/results/test-suite/results/test-case[@result='Ignored'])+count(test-suite/results/test-suite/results/test-case[@result='Skipped'])"/>
 		</xsl:attribute>
 		<xsl:attribute name="assertions">
-			<xsl:value-of select="@invalid+@inconclusive"/>
+			<xsl:value-of select="count(test-suite/results/test-suite/results/test-case[@result='Invalid'])+count(test-suite/results/test-suite/results/test-case[@result='Inconclusive'])"/>
 		</xsl:attribute>
 		<xsl:attribute name="time">
 			<xsl:value-of select="sum(test-suite/results/test-suite/results/test-case/@time)"/>
@@ -49,7 +49,7 @@
 				<xsl:value-of select="count(test-case[@result='Failure'])"/>
 			</xsl:attribute>
 			<xsl:attribute name="errors">
-				<xsl:value-of select="count(test-case[@result='Error'])+count(test-case[@result='Invalid'])"/>
+				<xsl:value-of select="count(test-case[@result='Error'])+count(test-case[@result='TimedOut'])"/>
 			</xsl:attribute>
 			<xsl:attribute name="skipped">
 				<xsl:value-of select="count(test-case[@result='NotRun'])+count(test-case[@result='Ignored'])+count(test-case[@result='Skipped'])"/>
