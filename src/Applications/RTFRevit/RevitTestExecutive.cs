@@ -330,7 +330,7 @@ namespace RTF.Applications
             var suiteItems = suite.results.Items.ToList();
             var innerSuites = suiteItems.Where(x => x.GetType() == typeof(testsuiteType)).Cast<testsuiteType>();
             suite.asserts = innerSuites.Sum(x => Convert.ToInt16(x.asserts)).ToString();
-            suite.result = innerSuites.Any(x => x.result == "Failure") ? "Failure" : "Success";
+            suite.result = innerSuites.Any(x => x.result == "Success") ? "Success" : "Failure";
             suite.time = innerSuites.Sum(x => Convert.ToDouble(x.time)).ToString();
         }
 
@@ -344,7 +344,7 @@ namespace RTF.Applications
             var suiteItems = suite.results.Items.ToList();
             var cases = suiteItems.Where(x => x.GetType() == typeof(testcaseType)).Cast<testcaseType>();
             suite.asserts = cases.Sum(x => Convert.ToInt16(x.asserts)).ToString();
-            suite.result = cases.Any(x => x.result == "Failure") ? "Failure" : "Success";
+            suite.result = cases.Any(x => x.result == "Success") ? "Success" : "Failure";
             suite.time = cases.Sum(x => Convert.ToDouble(x.time, CultureInfo.InvariantCulture)).ToString();
             //suite.executed = cases.All(x => x.executed == "False") ? "False" : "True";
             suite.executed = true.ToString();

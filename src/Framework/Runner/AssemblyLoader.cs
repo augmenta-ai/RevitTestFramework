@@ -100,11 +100,6 @@ namespace RTF.Framework
 
             var testAttribs = CustomAttributeData.GetCustomAttributes(test);
 
-            if (testAttribs.Any(x => x.Constructor.DeclaringType.Name == nameof(IgnoreAttribute)))
-            {
-                return false;
-            }
-
             var testModelAttrib = testAttribs.FirstOrDefault(x => x.Constructor.DeclaringType.Name == nameof(TestModelAttribute));
 
             if (testModelAttrib != null)
